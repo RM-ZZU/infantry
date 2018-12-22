@@ -1,0 +1,20 @@
+void control_chassis_motor(u16 chassis_motor_1,u16 chassis_motor_2,u16 chassis_motor_3,u16 chassis_motor_4)
+{
+    CanTxMsg CAN1_ChassisMotorStr;
+	
+	CAN1_ChassisMotorStr.StdId=CHASSISCONTROL;
+	CAN1_ChassisMotorStr.IDE=CAN_Id_Standard;
+	CAN1_ChassisMotorStr.RTR=CAN_RTR_Data;	 
+	CAN1_ChassisMotorStr.DLC=0x08;
+	
+	CAN1_ChassisMotorStr.Data[0]=(u8)(ChassisMotor_1 >> 8);
+	CAN1_ChassisMotorStr.Data[1]=(u8)ChassisMotor_1;
+	CAN1_ChassisMotorStr.Data[2]=(u8)(ChassisMotor_2 >> 8);
+	CAN1_ChassisMotorStr.Data[3]=(u8)ChassisMotor_2;
+	CAN1_ChassisMotorStr.Data[4]=(u8)(ChassisMotor_3 >> 8);
+	CAN1_ChassisMotorStr.Data[5]=(u8)ChassisMotor_3;
+	CAN1_ChassisMotorStr.Data[6]=(u8)(ChassisMotor_4 >> 8);
+	CAN1_ChassisMotorStr.Data[7]=(u8)ChassisMotor_4;
+	
+	CAN_Transmit(CAN1,&CAN1_ChassisMotorStr);
+}
